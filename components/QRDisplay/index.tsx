@@ -22,7 +22,11 @@ const PAY_APP_HOST = process.env.NEXT_PUBLIC_PAY_APP_HOST;
 const PAY_APP_ROUTE = process.env.NEXT_PUBLIC_PAY_APP_ROUTE;
 const PAY_APP_PROTOCOL = process.env.NEXT_PUBLIC_PAY_APP_PROTOCOL;
 
-const QRDisplay = ({ amount }) => {
+interface QRDisplayProps {
+  amount: number;
+}
+
+const QRDisplay = ({ amount }: QRDisplayProps) => {
   const APIString = React.useMemo(() => {
     const api = `${PAY_APP_PROTOCOL}://${PAY_APP_HOST}/${PAY_APP_ROUTE}/${MERCHANT_ID}`;
     const payload = JSON.stringify({
