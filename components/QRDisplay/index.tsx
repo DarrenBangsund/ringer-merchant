@@ -28,7 +28,7 @@ interface QRDisplayProps {
 
 const QRDisplay = ({ amount }: QRDisplayProps) => {
   const APIString = React.useMemo(() => {
-    const api = `${PAY_APP_PROTOCOL}://${PAY_APP_HOST}/${PAY_APP_ROUTE}/${MERCHANT_ID}`;
+    const api = `${PAY_APP_HOST}/${PAY_APP_ROUTE}/${MERCHANT_ID}`;
     const payload = JSON.stringify({
       amount: amount,
       wallet: MERCHANT_WALLET,
