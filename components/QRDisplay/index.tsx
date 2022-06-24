@@ -30,10 +30,11 @@ const QRDisplay = ({ amount }: QRDisplayProps) => {
   const APIString = React.useMemo(() => {
     const api = `${PAY_APP_HOST}/${PAY_APP_ROUTE}/${MERCHANT_ID}`;
     const payload = JSON.stringify({
+      merchantId: MERCHANT_ID,
       amount: amount,
-      wallet: MERCHANT_WALLET,
+      destination: MERCHANT_WALLET,
       version: MERCHANT_VERSION,
-      idempotency_key: v4(),
+      idempotencyKey: v4(),
     });
 
     const encryptedString = rsaInstance.encryptStringWithRsaPublicKey({
