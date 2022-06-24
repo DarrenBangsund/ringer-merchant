@@ -3,6 +3,7 @@ import EncryptRsa from "encrypt-rsa";
 import base64js from "base64-js";
 import QRCode from "react-qr-code";
 import { Grid, Typography } from "@mui/material";
+import { v4 } from "uuid";
 
 const pubkey = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsiLXlw2mFHH3FzRkMeGm
@@ -20,7 +21,6 @@ const MERCHANT_WALLET = process.env.NEXT_PUBLIC_MERCHANT_WALLET;
 const MERCHANT_VERSION = process.env.NEXT_PUBLIC_MERCHANT_VERSION;
 const PAY_APP_HOST = process.env.NEXT_PUBLIC_PAY_APP_HOST;
 const PAY_APP_ROUTE = process.env.NEXT_PUBLIC_PAY_APP_ROUTE;
-const PAY_APP_PROTOCOL = process.env.NEXT_PUBLIC_PAY_APP_PROTOCOL;
 
 interface QRDisplayProps {
   amount: number;
@@ -33,6 +33,7 @@ const QRDisplay = ({ amount }: QRDisplayProps) => {
       amount: amount,
       wallet: MERCHANT_WALLET,
       version: MERCHANT_VERSION,
+      idempotency_key: v4(),
     });
 
     const encryptedString = rsaInstance.encryptStringWithRsaPublicKey({
